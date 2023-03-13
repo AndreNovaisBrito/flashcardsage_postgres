@@ -25,6 +25,12 @@ function App() {
     setTitle("");
   }
 
+  async function handleDeleteDeck(deckId: string){
+    await fetch(`http://localhost:5000/decks/${deckId}`, {
+      method: 'DELETE',
+    });
+  } 
+
   useEffect(()=>{
     async function fetchDecks(){
       const response = await fetch('http://localhost:5000/decks');
@@ -40,10 +46,10 @@ function App() {
       <ul className='decks'>
         {
           decks.map((deck)=>(
-            <div>
-              <li key={deck._id}>{deck.title}<button className='delete-button'>X</button></li>
-              
-            </div>
+              <li key={deck._id}>                
+              <button onClick={()=>handleDeleteDeck(deck.id)}>X</button>
+              {deck.title}
+              </li>          
           ))
         }
       </ul>

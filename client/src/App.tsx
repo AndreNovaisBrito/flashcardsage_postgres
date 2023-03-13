@@ -8,9 +8,9 @@ type TDeck = {
 };
 
 function App() {
-  const [title, setTitle] = useState<TDeck[]>([]);
-  const [decks, setDecks] = useState([]);
-
+  const [decks, setDecks] = useState<TDeck[]>([]);
+  const [title, setTitle] = useState('');
+  
   async function handleCreateDeck(e: React.FormEvent){
     e.preventDefault();
     await fetch('http://localhost:5000/decks', {
@@ -30,8 +30,6 @@ function App() {
       const response = await fetch('http://localhost:5000/decks');
       const newDecks = await response.json();
       setDecks(newDecks);
-      console.log('newDecks: ')
-      console.log(newDecks);
     }
     fetchDecks();
   },[])

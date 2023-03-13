@@ -40,7 +40,10 @@ function App() {
       <ul className='decks'>
         {
           decks.map((deck)=>(
-            <li key={deck._id}>{deck.title}</li>
+            <div>
+              <li key={deck._id}>{deck.title}<button className='delete-button'>X</button></li>
+              
+            </div>
           ))
         }
       </ul>

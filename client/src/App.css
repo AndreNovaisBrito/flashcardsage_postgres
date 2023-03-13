@@ -40,3 +40,10 @@
 .decks li:hover{
   background: #aaa;
 }
+
+.delete-button{
+  display: flex;
+  background-color: red;
+  align-items: right;
+  justify-content: right;
+}

@@ -1,16 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
-// function Deck({id}){
-//   return(
-//     <li>Hey</li>
-//   )
-// }
+type TDeck = {
+  title: string;
+  _id: string;
+};
 
 function App() {
-  const [title, setTitle] = useState('');
-  // const [deck, setDeck] = useState('');
+  const [title, setTitle] = useState<TDeck[]>([]);
+  const [decks, setDecks] = useState([]);
 
   async function handleCreateDeck(e: React.FormEvent){
     e.preventDefault();
@@ -23,10 +22,30 @@ function App() {
         title,
       }),
     })
-    setTitle('');
+    setTitle("");
   }
+
+  useEffect(()=>{
+    async function fetchDecks(){
+      const response = await fetch('http://localhost:5000/decks');
+      const newDecks = await response.json();
+      setDecks(newDecks);
+      console.log('newDecks: ')
+      console.log(newDecks);
+    }
+    fetchDecks();
+  },[])
+
+
   return (
     <div className="App">
+      <ul className='decks'>
+        {
+          decks.map((deck)=>(
+            <li key={deck._id}>{deck.title}</li>
+          ))
+        }
+      </ul>
       <form onSubmit={handleCreateDeck}>
         <label htmlFor="deck-title">Deck Title</label>
         <input 

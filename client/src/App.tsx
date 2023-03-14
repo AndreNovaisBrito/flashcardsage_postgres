@@ -4,7 +4,7 @@ import './App.css'
 
 type TDeck = {
   title: string;
-  _id: string;
+  id: string;
 };
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
       method: 'DELETE',
     });
     const deletedId = await response.json()
-    setDecks(decks.filter((deck)=>deck._id !== deckId))
+    setDecks(decks.filter((deck)=>deck.id !== deckId))
   } 
 
   useEffect(()=>{
@@ -43,7 +43,7 @@ function App() {
 
     }
     fetchDecks();
-  },[decks])
+  },[])
 
 
   return (

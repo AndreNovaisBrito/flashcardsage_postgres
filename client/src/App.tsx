@@ -37,6 +37,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Decks</h1>
       <ul className='decks'>
         {
           decks.map((deck, index)=>(

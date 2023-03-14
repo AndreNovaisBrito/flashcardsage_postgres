@@ -1,0 +1,55 @@
+
+  
+  .Deck{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .Deck form{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .cards{
+    display: grid;
+    width: 600px;
+    margin: 0 auto;
+    gap: 10px;
+    grid-template-columns: repeat(3,1fr);
+    color:black;
+  }
+  
+  .cards li{
+    position:relative;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    height: 200px;
+    border: 1px solid white;
+    border-radius: 10px;
+  }
+  
+  .delete-button{
+    display: flex;
+    background-color: red;
+    align-items: right;
+    justify-content: right;
+  }
+  
+  .cards li button{
+    position: absolute;
+    font-size: 10px;
+    top: 5px;
+    right: 5px;
+  
+  }
+
+  .Deck h1{
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+  }

@@ -38,10 +38,6 @@
   border-radius: 10px;
 }
 
-.decks li:hover{
-  background: #aaa;
-}
-
 .delete-button{
   display: flex;
   background-color: red;

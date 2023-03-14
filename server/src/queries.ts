@@ -72,10 +72,10 @@ const getDecks = (request: Request, response: Response): void => {
 
   const createCard = (request: Request, response: Response):void => {
     const { title } = request.body;
-    const id = parseInt(request.params.id);
+    const deckId = parseInt(request.params.deckId);
 
   
-    pool.query('INSERT INTO cards (title, deck_id) VALUES ($1, $2) RETURNING *', [title, id], (error: Error, results: any) => {
+    pool.query('INSERT INTO cards (title, deck_id) VALUES ($1, $2) RETURNING *', [title, deckId], (error: Error, results: any) => {
       if (error) {
         throw error
       }
@@ -94,6 +94,18 @@ const getDecks = (request: Request, response: Response): void => {
     })
   }
 
+  const getCardsFromDeck = (request: Request, response: Response): void => {
+
+    const deckId = parseInt(request.params.deckId);
+
+    pool.query('SELECT * FROM cards WHERE deck_id = $1 ORDER BY id ASC',[deckId], (error: Error, results: any) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    })
+  }
+
  
 
   export default module.exports = {
@@ -104,4 +116,5 @@ const getDecks = (request: Request, response: Response): void => {
     deleteDeck,
     createCard,
     deleteCard,
+    getCardsFromDeck,
   }

@@ -14,14 +14,17 @@ app.use(
     extended: true,
   })
 )
-
+//Decks
 app.get('/decks', db.getDecks)
 app.get('/decks/:id', db.getDeckById )
 app.post('/decks', db.createDeck)
 app.put('/decks/:id', db.updateDeck)
 app.delete('/decks/:id', db.deleteDeck)
-app.post('/decks/:id', db.createCard)
-app.delete('/decks/:deckId/:cardId', db.deleteCard)
+
+//Cards
+app.get('/cards/:deckId', db.getCardsFromDeck)
+app.post('/cards/:deckId', db.createCard)
+app.delete('/cards/:cardId', db.deleteCard)
 
 
 

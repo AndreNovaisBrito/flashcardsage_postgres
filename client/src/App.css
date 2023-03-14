@@ -27,6 +27,7 @@
 }
 
 .decks li{
+  position:relative;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -46,4 +47,12 @@
   background-color: red;
   align-items: right;
   justify-content: right;
+}
+
+.decks li button{
+  position: absolute;
+  font-size: 10px;
+  top: 5px;
+  right: 5px;
+
 }

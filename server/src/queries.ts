@@ -27,7 +27,7 @@ const getDecks = (request: Request, response: Response): void => {
       if (error) {
         throw error
       }
-      response.status(200).json(results.rows)
+      response.status(200).json(results.rows[0])
     })
   }
 
@@ -38,7 +38,8 @@ const getDecks = (request: Request, response: Response): void => {
       if (error) {
         throw error
       }
-      response.status(201).send(`User added with ID: ${results.rows[0].id}`)
+      console.log(results.rows[0]);
+      response.status(201).send(results.rows[0])
     })
   }
   const updateDeck = (request: Request, response: Response):void => {
@@ -52,7 +53,7 @@ const getDecks = (request: Request, response: Response): void => {
         if (error) {
           throw error
         }
-        response.status(200).send(`User modified with ID: ${id}`)
+        response.status(200).send({title: title, id: id})
       }
     )
   }
@@ -64,7 +65,7 @@ const getDecks = (request: Request, response: Response): void => {
       if (error) {
         throw error
       }
-      response.status(200).send(`User deleted with ID: ${id}`)
+      response.status(200).send({id: id})
     })
   }
 

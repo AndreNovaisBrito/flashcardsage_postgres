@@ -13,7 +13,7 @@ function App() {
   
   async function handleCreateDeck(e: React.FormEvent){
     e.preventDefault();
-    await fetch('http://localhost:5000/decks', {
+    const response = await fetch('http://localhost:5000/decks', {
       headers:{
         "Content-type": "application/json"
       },
@@ -22,13 +22,17 @@ function App() {
         title,
       }),
     })
+    const deck = await response.json();
+    setDecks([...decks, deck]);
     setTitle("");
   }
 
   async function handleDeleteDeck(deckId: string){
-    await fetch(`http://localhost:5000/decks/${deckId}`, {
+    const response = await fetch(`http://localhost:5000/decks/${deckId}`, {
       method: 'DELETE',
     });
+    const deletedId = await response.json()
+    setDecks(decks.filter((deck)=>deck._id !== deckId))
   } 
 
   useEffect(()=>{
@@ -36,17 +40,18 @@ function App() {
       const response = await fetch('http://localhost:5000/decks');
       const newDecks = await response.json();
       setDecks(newDecks);
+
     }
     fetchDecks();
-  },[])
+  },[decks])
 
 
   return (
     <div className="App">
       <ul className='decks'>
         {
-          decks.map((deck)=>(
-              <li key={deck._id}>                
+          decks.map((deck, index)=>(
+              <li key={index}>                
               <button onClick={()=>handleDeleteDeck(deck.id)}>X</button>
               {deck.title}
               </li>          

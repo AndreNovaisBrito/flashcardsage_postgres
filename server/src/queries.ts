@@ -42,6 +42,7 @@ const getDecks = (request: Request, response: Response): void => {
       response.status(201).send(results.rows[0])
     })
   }
+
   const updateDeck = (request: Request, response: Response):void => {
     const id = parseInt(request.params.id)
     const { title } = request.body
@@ -69,6 +70,30 @@ const getDecks = (request: Request, response: Response): void => {
     })
   }
 
+  const createCard = (request: Request, response: Response):void => {
+    const { title } = request.body;
+    const id = parseInt(request.params.id);
+
+  
+    pool.query('INSERT INTO cards (title, deck_id) VALUES ($1, $2) RETURNING *', [title, id], (error: Error, results: any) => {
+      if (error) {
+        throw error
+      }
+      console.log(results.rows[0]);
+      response.status(201).send(results.rows[0])
+    })
+  }
+
+  const deleteCard = (request: Request, response: Response) => {
+    const cardId = parseInt(request.params.cardId)
+    pool.query('DELETE FROM cards WHERE deck_id = $1', [cardId], (error: Error, results: any):void => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send({ cardId : cardId })
+    })
+  }
+
  
 
   export default module.exports = {
@@ -76,5 +101,7 @@ const getDecks = (request: Request, response: Response): void => {
     getDeckById,
     createDeck,
     updateDeck,
-    deleteDeck
+    deleteDeck,
+    createCard,
+    deleteCard,
   }

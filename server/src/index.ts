@@ -20,6 +20,9 @@ app.get('/decks/:id', db.getDeckById )
 app.post('/decks', db.createDeck)
 app.put('/decks/:id', db.updateDeck)
 app.delete('/decks/:id', db.deleteDeck)
+app.post('/decks/:id', db.createCard)
+app.delete('/decks/:deckId/:cardId', db.deleteCard)
+
 
 
 app.listen(port, () => {

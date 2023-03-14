@@ -38,7 +38,6 @@ const getDecks = (request: Request, response: Response): void => {
       if (error) {
         throw error
       }
-      console.log(results.rows[0]);
       response.status(201).send(results.rows[0])
     })
   }
@@ -79,14 +78,13 @@ const getDecks = (request: Request, response: Response): void => {
       if (error) {
         throw error
       }
-      console.log(results.rows[0]);
       response.status(201).send(results.rows[0])
     })
   }
 
   const deleteCard = (request: Request, response: Response) => {
     const cardId = parseInt(request.params.cardId)
-    pool.query('DELETE FROM cards WHERE deck_id = $1', [cardId], (error: Error, results: any):void => {
+    pool.query('DELETE FROM cards WHERE id = $1', [cardId], (error: Error, results: any):void => {
       if (error) {
         throw error
       }
